@@ -1,0 +1,28 @@
+{
+  "bookings": [
+    {
+      "id": 1,
+      "roomName": "EAC Hall",
+      "hostName": "John Doe",
+      "guestsName": "IT-4A1",
+      "date": "2021-12-12",
+      "fromTo": "12:00-13:00"
+    },
+    {
+      "id": 2,
+      "roomName": "Room 404",
+      "hostName": "Steven Smith",
+      "guestsName": "BA-123",
+      "date": "2021-12-15",
+      "fromTo": "10:00-10:30"
+    },
+    {
+      "id": 3,
+      "roomName": "Meeting Room",
+      "hostName": "Stephen Hawking",
+      "guestsName": "IT-101",
+      "date": "2021-12-23",
+      "fromTo": "08:30-09:00"
+    }
+  ]
+}

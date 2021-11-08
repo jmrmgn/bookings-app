@@ -1,11 +1,12 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+
+import Bookings from './pages/Bookings';
 
 function App() {
   return (
-    <div>
-      <Button variant='contained'>Hello World</Button>
-    </div>
+    <>
+      <Bookings />
+    </>
   );
 }
 

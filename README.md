@@ -6,6 +6,7 @@ Bookings
 
 | Name       | Type                          | Sample                              |
 | ---------- | ----------------------------- | ----------------------------------- |
+| id         | string                        | length + 1                          |
 | roomName   | string                        | --                                  |
 | hostName   | string                        | --                                  |
 | guestsName | string                        | --                                  |
@@ -14,7 +15,7 @@ Bookings
 
 
 
-- [ ] Booking List Page
+- [ ] Booking List Page (/)
   - [ ] List of Booking
   - [ ] Edit Booking (with Icon)
   - [ ] Delete Booking (with Icon)
