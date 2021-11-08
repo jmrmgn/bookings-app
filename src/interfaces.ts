@@ -1,3 +1,5 @@
+import { Action } from './enums';
+
 export interface IBookings {
   id: number;
   roomName: string;
@@ -12,8 +14,8 @@ export interface IBookingState {
 }
 
 export type IBookingAction =
-  | { type: 'GET'; payload: IBookings[] }
-  | { type: 'DELETE'; payload: number };
+  | { type: Action.GET; payload: IBookings[] }
+  | { type: Action.DELETE; payload: number };
 
 export interface IContextModel extends IBookingState {
   deleteBooking: (id: number) => void;

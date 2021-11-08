@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import { Action } from '../enums';
 
 import { IBookingAction, IBookingState, IContextModel } from '../interfaces';
 import { BookingService } from '../services/bookings';
@@ -14,12 +15,12 @@ const reducer = (
   action: IBookingAction
 ): IBookingState => {
   switch (action.type) {
-    case 'GET':
+    case Action.GET:
       return {
         ...state,
         bookings: action.payload,
       };
-    case 'DELETE':
+    case Action.DELETE:
       return {
         ...state,
         bookings: state.bookings.filter(
@@ -45,7 +46,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
   const getBookings = async (): Promise<void> => {
     const response = await BookingService.getBookings();
     dispatch({
-      type: 'GET',
+      type: Action.GET,
       payload: response,
     });
   };
@@ -53,7 +54,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
   const deleteBooking = async (id: number): Promise<void> => {
     await BookingService.deleteBooking(id);
     dispatch({
-      type: 'DELETE',
+      type: Action.DELETE,
       payload: id,
     });
   };

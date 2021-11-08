@@ -16,9 +16,9 @@ Bookings
 
 
 - [ ] Booking List Page (/)
-  - [ ] List of Booking
+  - [x] List of Booking
   - [ ] Edit Booking (with Icon)
-  - [ ] Delete Booking (with Icon)
+  - [x] Delete Booking (with Icon)
   - [ ] Sortable Booking
     - [ ] Meeting Room name
     - [ ] Host name
