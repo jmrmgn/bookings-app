@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# Bookings-App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Model**
 
-## Available Scripts
+Bookings
 
-In the project directory, you can run:
+| Name       | Type                          | Sample                              |
+| ---------- | ----------------------------- | ----------------------------------- |
+| roomName   | string                        | --                                  |
+| hostName   | string                        | --                                  |
+| guestsName | string                        | --                                  |
+| date       | date                          | yyyy-mm-dd                          |
+| fromTo     | object {from: time, to: time} | { from: "08:00 AM", to: "09:00AM" } |
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [ ] Booking List Page
+  - [ ] List of Booking
+  - [ ] Edit Booking (with Icon)
+  - [ ] Delete Booking (with Icon)
+  - [ ] Sortable Booking
+    - [ ] Meeting Room name
+    - [ ] Host name
+    - [ ] Guests name
+    - [ ] Date
+    - [ ] From-To (13:00-20:00)
+  - [ ] Able to Filtered By:
+    - [ ] By the date interval (only days, not times) of the booking time
+    - [ ] By meeting room
+  - [ ] Full Text search
+    - [ ] Username
+    - [ ] meeting room name
+- [ ] Single Meeting Room Details Page
+  - [ ] This page can display the name of the room with any image and details about the room/
+    It should also display the bookings made for that particular room.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+Validations
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [ ] A booking can be 30 minute or 1 hour long
+- [ ] The first booking start time at 8:00 AM, the last one (start time) at 5:00 PM
+- [ ] Booking start time and end time has to be on the same day
+- [ ] A meeting room can not be booked if already booked for the chosen time
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+Additional Notes
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [ ] Responsive
+- [ ] Form Validation
+- [ ] Error handler
+- [ ] Documented Code
+- [ ] Cypress Test Case
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Good to have feature
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [ ] Add Booking
+- [ ] Pagination of Booking
+- [ ] Login
+- [ ] Validation: Can't create booking for previous dates
