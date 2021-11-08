@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IBookings } from '../interface';
+import { IBookings } from '../interfaces';
 
 // Todo: Move to .env
 const SERVER_URI = 'http://localhost:3001';
@@ -13,4 +13,4 @@ const deleteBooking = async (id: number): Promise<void> => {
   await axios.delete(`${SERVER_URI}/bookings/${id}`);
 };
 
-export { getBookings, deleteBooking };
+export const BookingService = { getBookings, deleteBooking };

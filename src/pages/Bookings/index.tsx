@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -15,22 +15,12 @@ import {
 } from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
-import { IBookings } from '../../api/interface';
-import { getBookings, deleteBooking } from '../../api/controllers/bookings';
+import { useBookings } from '../../context/Context';
+import { IBookings } from '../../interfaces';
 
 export default function Bookings() {
-  const [data, setData] = useState<IBookings[]>([]);
   const [bookingId, setBookingId] = useState<number>();
-
-  useEffect(() => {
-    init();
-  }, []);
-
-  // Fetch the bookings data
-  const init = async (): Promise<void> => {
-    const bookings = await getBookings();
-    setData(bookings);
-  };
+  const { bookings, deleteBooking } = useBookings();
 
   const handleClose = (): void => setBookingId(undefined);
 
@@ -75,7 +65,7 @@ export default function Bookings() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row: IBookings) => {
+            {bookings.map((row: IBookings) => {
               const deleteStyle = {
                 backgroundColor: '#d9534f',
               };
