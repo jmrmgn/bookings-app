@@ -23,9 +23,15 @@ const deleteBooking = async (id: number): Promise<void> => {
   await axios.delete(`${SERVER_URI}/bookings/${id}`);
 };
 
+const getBookingsByFilter = async (filter: string): Promise<IBookings[]> => {
+  const res = await axios.get(`${SERVER_URI}/bookings?${filter}`);
+  return res.data;
+};
+
 export const BookingService = {
   getBookings,
   getBooking,
+  getBookingsByFilter,
   updateBooking,
   deleteBooking,
 };
