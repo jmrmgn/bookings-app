@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import {
   Button,
-  // Typography,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -12,11 +11,16 @@ import {
   FormControl,
   InputLabel,
   Input,
-  FormHelperText,
   Grid,
 } from '@mui/material';
+import { Box } from '@mui/system';
 import { Close as CloseIcon } from '@mui/icons-material';
+import { useFormik } from 'formik';
+
 import { useBookings } from '../../context/Context';
+import { IBookings } from '../../interfaces';
+import InputField from '../../components/InputField';
+import * as Datetime from '../../helpers/datetime';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -63,83 +67,90 @@ interface Props {
   onClose: () => void;
 }
 
-/*
-  Date | From-To
-  Meeting Room
-  Host name
-  Guests name
-*/
-
 const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
-  const { getBooking, booking } = useBookings();
-  const handleSave = () => {};
+  const { booking, updateBooking } = useBookings();
 
-  useEffect(() => {
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const formik = useFormik({
+    initialValues: { ...booking },
+    validateOnChange: false,
+    // validationSchema: Schema,
+    onSubmit: async (values, { setFieldError, setSubmitting, resetForm }) => {
+      setSubmitting(true);
+      await handleUpdate(values);
+      setSubmitting(false);
+    },
+  });
 
-  const getData = async (): Promise<void> => {
-    await getBooking(id);
+  const handleUpdate = async (values: IBookings): Promise<void> => {
+    await updateBooking(values);
+    onClose();
   };
+
+  const values: IBookings = formik.values;
 
   return (
     <BootstrapDialog onClose={onClose} open={open}>
-      <BootstrapDialogTitle id='customized-dialog-title' onClose={onClose}>
-        Edit Booking
-      </BootstrapDialogTitle>
-      <DialogContent dividers>
-        {/* <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </Typography> */}
-        <Grid container spacing={2} p={2}>
-          <Grid item xs={6}>
-            <FormControl variant='standard' fullWidth>
-              <InputLabel>Date</InputLabel>
-              <Input value={booking.date} onChange={() => {}} />
-              {/* <FormHelperText id='component-error-text'>Error</FormHelperText> */}
-            </FormControl>
+      <Box component='form' onSubmit={formik.handleSubmit}>
+        <BootstrapDialogTitle id='customized-dialog-title' onClose={onClose}>
+          Edit Booking
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+          <Grid container spacing={3} p={2}>
+            <Grid item xs={6}>
+              <InputField
+                type='date'
+                label='Date'
+                value={values.date}
+                onChange={formik.handleChange('date')}
+                error={formik.errors.date}
+                inputProps={{ min: Datetime.today() }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl variant='standard' fullWidth>
+                <InputLabel>From - To</InputLabel>
+                <Input
+                  value={values.fromTo}
+                  onChange={formik.handleChange('fromTo')}
+                />
+                {/* <FormHelperText id='component-error-text'>Error</FormHelperText> */}
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <InputField
+                label='Room Name'
+                value={values.roomName}
+                onChange={formik.handleChange('roomName')}
+                error={formik.errors.roomName}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <InputField
+                label='Host Name'
+                value={values.hostName}
+                onChange={formik.handleChange('hostName')}
+                error={formik.errors.hostName}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <InputField
+                label='Guests Name'
+                value={values.guestsName}
+                onChange={formik.handleChange('guestsName')}
+                error={formik.errors.guestsName}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <FormControl variant='standard' fullWidth>
-              <InputLabel>From - To</InputLabel>
-              <Input value={booking.fromTo} onChange={() => {}} />
-              {/* <FormHelperText id='component-error-text'>Error</FormHelperText> */}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl variant='standard' fullWidth>
-              <InputLabel>Room Name</InputLabel>
-              <Input value={booking.roomName} onChange={() => {}} />
-              {/* <FormHelperText id='component-error-text'>Error</FormHelperText> */}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl variant='standard' fullWidth>
-              <InputLabel>Host Name</InputLabel>
-              <Input value={booking.hostName} onChange={() => {}} />
-              {/* <FormHelperText id='component-error-text'>Error</FormHelperText> */}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl variant='standard' fullWidth>
-              <InputLabel>Guests Name</InputLabel>
-              <Input value={booking.guestsName} onChange={() => {}} />
-              {/* <FormHelperText id='component-error-text'>Error</FormHelperText> */}
-            </FormControl>
-          </Grid>
-        </Grid>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color='inherit'>
-          Cancel
-        </Button>
-        <Button onClick={handleSave} color='primary'>
-          Save
-        </Button>
-      </DialogActions>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose} color='inherit'>
+            Cancel
+          </Button>
+          <Button type='submit' color='primary'>
+            Save
+          </Button>
+        </DialogActions>
+      </Box>
     </BootstrapDialog>
   );
 };

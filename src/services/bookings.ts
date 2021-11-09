@@ -14,8 +14,18 @@ const getBooking = async (id: number): Promise<IBookings> => {
   return res.data;
 };
 
+const updateBooking = async (booking: IBookings): Promise<IBookings> => {
+  const res = await axios.put(`${SERVER_URI}/bookings/${booking?.id}`, booking);
+  return res.data;
+};
+
 const deleteBooking = async (id: number): Promise<void> => {
   await axios.delete(`${SERVER_URI}/bookings/${id}`);
 };
 
-export const BookingService = { getBookings, getBooking, deleteBooking };
+export const BookingService = {
+  getBookings,
+  getBooking,
+  updateBooking,
+  deleteBooking,
+};

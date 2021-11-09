@@ -20,18 +20,29 @@ import { IBookings } from '../../interfaces';
 import BookingEdit from './BookingEdit';
 
 export default function Bookings() {
-  const [bookingId, setBookingId] = useState<number | undefined>(2); // todo: remove undefineds
-  const [showEdit, setShowEdit] = useState(true);
-  const { bookings, deleteBooking } = useBookings();
+  const [bookingId, setBookingId] = useState<number>();
+  const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const { bookings, deleteBooking, getBooking } = useBookings();
 
-  const handleClose = (): void => setBookingId(undefined);
+  const handleClose = (): void => {
+    setBookingId(undefined);
+    setShowDelete(false);
+  };
 
   // Handles delete of booking
   const handleDelete = async (): Promise<void> => {
     if (bookingId) {
       await deleteBooking(bookingId);
       setBookingId(undefined);
+      setShowDelete(false);
     }
+  };
+
+  const handleOpenEdit = async (id: any): Promise<void> => {
+    setBookingId(id);
+    await getBooking(id);
+    setShowEdit(true);
   };
 
   const handleCloseEdit = (): void => {
@@ -40,12 +51,12 @@ export default function Bookings() {
   };
 
   // Check if the Booking Id exist
-  const showDeleteDialog = !!bookingId && !showEdit && false; // todo: remove false
+  const showDeleteDialog = !!bookingId && showDelete;
   const showEditDialog = !!bookingId && showEdit;
 
   return (
     <>
-      <Dialog open={showDeleteDialog} onClose={handleClose}>
+      <Dialog open={showDelete} onClose={handleClose}>
         <DialogTitle>Are you sure you want to delete?</DialogTitle>
         <DialogActions>
           <Button onClick={handleClose} data-cy='cancel-delete'>
@@ -99,17 +110,17 @@ export default function Bookings() {
                       color='primary'
                       component='span'
                       data-cy='edit'
-                      onClick={() => {
-                        setBookingId(row.id);
-                        setShowEdit(true);
-                      }}
+                      onClick={() => handleOpenEdit(row?.id)}
                     >
                       <EditIcon />
                     </IconButton>
                     <IconButton
                       color='error'
                       component='span'
-                      onClick={() => setBookingId(row.id)}
+                      onClick={() => {
+                        setBookingId(row.id);
+                        setShowDelete(true);
+                      }}
                       data-cy='delete'
                     >
                       <DeleteIcon />

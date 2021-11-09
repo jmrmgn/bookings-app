@@ -26,11 +26,26 @@ const reducer = (
         ...state,
         bookings: action.payload,
       };
+
     case Action.GET_ONE:
       return {
         ...state,
         booking: action.payload,
       };
+
+    case Action.UPDATE:
+      const updatedBooking = action.payload;
+
+      const updatedBookings: IBookings[] = state.bookings.map(booking => {
+        if (booking.id === updatedBooking.id) {
+          return updatedBooking;
+        }
+
+        return booking;
+      });
+
+      return { ...state, bookings: updatedBookings };
+
     case Action.DELETE:
       return {
         ...state,
@@ -38,6 +53,7 @@ const reducer = (
           booking => booking.id !== action.payload
         ),
       };
+
     default:
       return state;
   }
@@ -70,6 +86,14 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  const updateBooking = async (booking: IBookings): Promise<void> => {
+    const response = await BookingService.updateBooking(booking);
+    dispatch({
+      type: Action.UPDATE,
+      payload: response,
+    });
+  };
+
   const deleteBooking = async (id: number): Promise<void> => {
     await BookingService.deleteBooking(id);
     dispatch({
@@ -85,6 +109,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
         bookings: state.bookings,
         deleteBooking,
         getBooking,
+        updateBooking,
       }}
     >
       {children}

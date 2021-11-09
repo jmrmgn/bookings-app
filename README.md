@@ -17,7 +17,7 @@ Bookings
 
 - [ ] Booking List Page (/)
   - [x] List of Booking
-  - [ ] Edit Booking (with Icon)
+  - [x] Edit Booking (with Icon)
   - [x] Delete Booking (with Icon)
   - [ ] Sortable Booking
     - [ ] Meeting Room name
@@ -61,4 +61,4 @@ Good to have feature
 - [ ] Add Booking
 - [ ] Pagination of Booking
 - [ ] Login
-- [ ] Validation: Can't create booking for previous dates
+- [x] Validation: Can't create booking for previous dates
