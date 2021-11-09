@@ -31,6 +31,7 @@ const InputField: React.FC<Props> = ({
         onChange={onChange}
         inputProps={inputProps}
         size='small'
+        variant='standard'
       />
       {hasError && (
         <FormHelperText id='component-error-text'>{error}</FormHelperText>
