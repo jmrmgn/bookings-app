@@ -9,8 +9,13 @@ const getBookings = async (): Promise<IBookings[]> => {
   return res.data;
 };
 
+const getBooking = async (id: number): Promise<IBookings> => {
+  const res = await axios.get(`${SERVER_URI}/bookings/${id}`);
+  return res.data;
+};
+
 const deleteBooking = async (id: number): Promise<void> => {
   await axios.delete(`${SERVER_URI}/bookings/${id}`);
 };
 
-export const BookingService = { getBookings, deleteBooking };
+export const BookingService = { getBookings, getBooking, deleteBooking };

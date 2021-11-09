@@ -17,23 +17,31 @@ import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
 import { useBookings } from '../../context/Context';
 import { IBookings } from '../../interfaces';
+import BookingEdit from './BookingEdit';
 
 export default function Bookings() {
-  const [bookingId, setBookingId] = useState<number>();
+  const [bookingId, setBookingId] = useState<number | undefined>(2); // todo: remove undefineds
+  const [showEdit, setShowEdit] = useState(true);
   const { bookings, deleteBooking } = useBookings();
 
   const handleClose = (): void => setBookingId(undefined);
 
   // Handles delete of booking
-  const handleDelete = async () => {
+  const handleDelete = async (): Promise<void> => {
     if (bookingId) {
       await deleteBooking(bookingId);
       setBookingId(undefined);
     }
   };
 
+  const handleCloseEdit = (): void => {
+    setShowEdit(false);
+    setBookingId(undefined);
+  };
+
   // Check if the Booking Id exist
-  const showDeleteDialog = !!bookingId;
+  const showDeleteDialog = !!bookingId && !showEdit && false; // todo: remove false
+  const showEditDialog = !!bookingId && showEdit;
 
   return (
     <>
@@ -52,6 +60,9 @@ export default function Bookings() {
           </Button>
         </DialogActions>
       </Dialog>
+      {showEditDialog && (
+        <BookingEdit id={bookingId} open={showEdit} onClose={handleCloseEdit} />
+      )}
       <TableContainer component={Paper} data-cy='bookings-list'>
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
@@ -74,7 +85,9 @@ export default function Bookings() {
                 <TableRow
                   key={row.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  style={row.id === bookingId ? deleteStyle : {}}
+                  style={
+                    row.id === bookingId && showDeleteDialog ? deleteStyle : {}
+                  }
                 >
                   <TableCell>{row.roomName}</TableCell>
                   <TableCell>{row.hostName}</TableCell>
@@ -82,7 +95,15 @@ export default function Bookings() {
                   <TableCell>{row.date}</TableCell>
                   <TableCell>{row.fromTo}</TableCell>
                   <TableCell align='center'>
-                    <IconButton color='primary' component='span' data-cy='edit'>
+                    <IconButton
+                      color='primary'
+                      component='span'
+                      data-cy='edit'
+                      onClick={() => {
+                        setBookingId(row.id);
+                        setShowEdit(true);
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
                     <IconButton

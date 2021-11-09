@@ -1,12 +1,18 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { Action } from '../enums';
 
-import { IBookingAction, IBookingState, IContextModel } from '../interfaces';
+import {
+  IBookingAction,
+  IBookings,
+  IBookingState,
+  IContextModel,
+} from '../interfaces';
 import { BookingService } from '../services/bookings';
 
 // Initial State
 const initialState: IBookingState = {
   bookings: [],
+  booking: {} as IBookings,
 };
 
 // Reducer
@@ -19,6 +25,11 @@ const reducer = (
       return {
         ...state,
         bookings: action.payload,
+      };
+    case Action.GET_ONE:
+      return {
+        ...state,
+        booking: action.payload,
       };
     case Action.DELETE:
       return {
@@ -51,6 +62,14 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  const getBooking = async (id: number): Promise<void> => {
+    const response = await BookingService.getBooking(id);
+    dispatch({
+      type: Action.GET_ONE,
+      payload: response,
+    });
+  };
+
   const deleteBooking = async (id: number): Promise<void> => {
     await BookingService.deleteBooking(id);
     dispatch({
@@ -62,8 +81,10 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
     <Context.Provider
       value={{
+        booking: state.booking,
         bookings: state.bookings,
         deleteBooking,
+        getBooking,
       }}
     >
       {children}
