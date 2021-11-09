@@ -15,19 +15,19 @@ const schedule: { start: string; end: string } = { start: START, end: END };
 // Get date for today
 const today = (): string => moment(Date.now()).format(DATE_FORMAT);
 
-// Check if the schedule is on correct time
+// Check if the time is on correct schedule
 const isValidSchedule = (timeRange: { from: string; to: string }): boolean => {
-  const startTime = moment(START, TIME_FORMAT);
-  const endingTime = moment(END, TIME_FORMAT);
+  const startTime = moment(schedule?.start ?? START, TIME_FORMAT);
+  const endingTime = moment(schedule?.end ?? END, TIME_FORMAT);
 
-  const isSameOrAfterStart = moment(timeRange?.from, TIME_FORMAT).isSameOrAfter(
-    startTime
-  );
-  const isSameOrBeforeEnd = moment(timeRange?.to, TIME_FORMAT).isSameOrBefore(
-    endingTime
-  );
+  const isCorrectStart = moment(timeRange?.from, TIME_FORMAT)
+    .add(1, 'minutes')
+    .isBetween(startTime, endingTime);
+  const isCorrectEnd = moment(timeRange?.to, TIME_FORMAT)
+    .add(-1, 'minutes')
+    .isBetween(startTime, endingTime);
 
-  return isSameOrAfterStart && isSameOrBeforeEnd;
+  return isCorrectStart && isCorrectEnd;
 };
 
 // Check if the duration is half or 60mins(1 hour)
