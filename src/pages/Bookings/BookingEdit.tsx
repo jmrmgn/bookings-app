@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import {
@@ -18,6 +18,7 @@ import * as Yup from 'yup';
 import { useBookings } from '../../context/Context';
 import { IBookings } from '../../interfaces';
 import InputField from '../../components/InputField';
+import Alert from '../../components/Alert';
 import * as Datetime from '../../helpers/datetime';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -76,16 +77,49 @@ const Schema = Yup.object().shape({
 
 const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
   const { booking, updateBooking } = useBookings();
+  const [errors, setErrors] = useState<string[]>([]);
 
   const formik = useFormik({
     initialValues: { ...booking },
     validationSchema: Schema,
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true);
-      await handleUpdate(values);
+      const hasError = validate();
+      if (!hasError) {
+        await handleUpdate(values);
+      }
       setSubmitting(false);
     },
   });
+
+  const validate = (): boolean => {
+    const _errors: string[] = [];
+
+    const isValidSchedule = Datetime.isValidSchedule({
+      from: formik.values.from,
+      to: formik.values.to,
+    });
+    const isValidTimeDuration = Datetime.isValidTimeDuration(
+      formik.values.from,
+      formik.values.to
+    );
+
+    if (!isValidSchedule) {
+      const schedule = Datetime.schedule;
+      _errors.push(
+        `Booking is only available at ${schedule.start} - ${schedule.end}`
+      );
+    }
+
+    if (!isValidTimeDuration) {
+      _errors.push(`Booking should be 30-minute or 1-hour long only`);
+    }
+
+    const hasErrors = _errors.length > 0;
+    setErrors(_errors);
+
+    return hasErrors;
+  };
 
   const handleUpdate = async (values: IBookings): Promise<void> => {
     await updateBooking(values);
@@ -102,6 +136,11 @@ const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Grid container spacing={3} p={1}>
+            {errors.length > 0 && (
+              <Grid item xs={12}>
+                <Alert severity='error' title='Error' message={errors} />
+              </Grid>
+            )}
             <Grid item xs={12}>
               <InputField
                 name='date'

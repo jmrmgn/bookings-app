@@ -29,7 +29,7 @@ Bookings
     - [ ] By the date interval (only days, not times) of the booking time
     - [ ] By meeting room
   - [ ] Full Text search
-    - [ ] Username
+    - [ ] user name? (Might be hostName)
     - [ ] meeting room name
 - [ ] Single Meeting Room Details Page
   - [ ] This page can display the name of the room with any image and details about the room/
@@ -39,9 +39,9 @@ Bookings
 
 Validations
 
-- [ ] A booking can be 30 minute or 1 hour long
-- [ ] The first booking start time at 8:00 AM, the last one (start time) at 5:00 PM
-- [ ] Booking start time and end time has to be on the same day
+- [x] A booking can be 30 minute or 1 hour long
+- [x] The first booking start time at 8:00 AM, the last one (start time) at 5:00 PM
+- [x] Booking start time and end time has to be on the same day
 - [ ] A meeting room can not be booked if already booked for the chosen time
 
 
