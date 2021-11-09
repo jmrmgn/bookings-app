@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
   IconButton,
   Dialog,
   DialogTitle,
   DialogActions,
   Button,
-} from '@mui/material';
+} from '@material-ui/core';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
 import { useBookings } from '../../context/Context';
-import { IBookings } from '../../interfaces';
 import BookingEdit from './BookingEdit';
 
 export default function Bookings() {
@@ -51,8 +44,78 @@ export default function Bookings() {
   };
 
   // Check if the Booking Id exist
-  const showDeleteDialog = !!bookingId && showDelete;
   const showEditDialog = !!bookingId && showEdit;
+
+  const columns: GridColDef[] = [
+    // { field: 'id', headerName: 'ID', width: 70 },
+    {
+      field: 'roomName',
+      headerName: 'Meeting Room',
+      width: 200,
+      disableColumnMenu: true,
+    },
+    {
+      field: 'hostName',
+      headerName: 'Host Name',
+      width: 200,
+      disableColumnMenu: true,
+    },
+    {
+      field: 'guestsName',
+      headerName: 'Guests Name',
+      width: 200,
+      disableColumnMenu: true,
+    },
+    {
+      field: 'date',
+      headerName: 'Date',
+      width: 120,
+      disableColumnMenu: true,
+    },
+    {
+      field: '',
+      headerName: 'From-To',
+      width: 120,
+      disableColumnMenu: true,
+      valueGetter: (params: GridValueGetterParams) => {
+        return `${params.row?.from} - ${params.row?.to}`;
+      },
+    },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 120,
+      sortable: false,
+      align: 'center',
+      headerAlign: 'center',
+      disableColumnMenu: true,
+      renderCell: params => {
+        return (
+          <>
+            <IconButton
+              color='primary'
+              component='span'
+              data-cy='edit'
+              onClick={() => handleOpenEdit(params.row?.id)}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              color='secondary'
+              component='span'
+              onClick={() => {
+                setBookingId(params.row.id);
+                setShowDelete(true);
+              }}
+              data-cy='delete'
+            >
+              <DeleteIcon />
+            </IconButton>
+          </>
+        );
+      },
+    },
+  ];
 
   return (
     <>
@@ -74,66 +137,13 @@ export default function Bookings() {
       {showEditDialog && (
         <BookingEdit id={bookingId} open={showEdit} onClose={handleCloseEdit} />
       )}
-      <TableContainer component={Paper} data-cy='bookings-list'>
-        <Table sx={{ minWidth: 650 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Room Name</TableCell>
-              <TableCell>Host Name</TableCell>
-              <TableCell>Guests Name</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>From-To</TableCell>
-              <TableCell align='center'>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {bookings.map((row: IBookings) => {
-              const deleteStyle = {
-                backgroundColor: '#d9534f',
-              };
-
-              return (
-                <TableRow
-                  key={row.id}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  style={
-                    row.id === bookingId && showDeleteDialog ? deleteStyle : {}
-                  }
-                >
-                  <TableCell>{row.roomName}</TableCell>
-                  <TableCell>{row.hostName}</TableCell>
-                  <TableCell>{row.guestsName}</TableCell>
-                  <TableCell>{row.date}</TableCell>
-                  <TableCell>
-                    {row.from} - {row.to}
-                  </TableCell>
-                  <TableCell align='center'>
-                    <IconButton
-                      color='primary'
-                      component='span'
-                      data-cy='edit'
-                      onClick={() => handleOpenEdit(row?.id)}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      color='error'
-                      component='span'
-                      onClick={() => {
-                        setBookingId(row.id);
-                        setShowDelete(true);
-                      }}
-                      data-cy='delete'
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <DataGrid
+        rows={bookings}
+        columns={columns}
+        pageSize={bookings.length}
+        hideFooter
+        autoHeight
+      />
     </>
   );
 }

@@ -19,12 +19,12 @@ Bookings
   - [x] List of Booking
   - [x] Edit Booking (with Icon)
   - [x] Delete Booking (with Icon)
-  - [ ] Sortable Booking
-    - [ ] Meeting Room name
-    - [ ] Host name
-    - [ ] Guests name
-    - [ ] Date
-    - [ ] From-To (08:00-17:00)
+  - [x] Sortable Booking
+    - [x] Meeting Room name
+    - [x] Host name
+    - [x] Guests name
+    - [x] Date
+    - [x] From-To (08:00-17:00)
   - [ ] Able to Filtered By:
     - [ ] By the date interval (only days, not times) of the booking time
     - [ ] By meeting room

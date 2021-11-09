@@ -5,24 +5,45 @@
       "roomName": "EAC Hall",
       "hostName": "John Doe",
       "guestsName": "IT-4A1",
-      "date": "2021-12-12",
-      "fromTo": "12:00-13:00"
+      "date": "2021-11-09",
+      "from": "10:00",
+      "to": "10:30"
     },
     {
       "id": 2,
-      "roomName": "Room 404",
-      "hostName": "Steven Smith",
-      "guestsName": "BA-123",
+      "roomName": "Room names",
+      "hostName": "Lee Kum King",
+      "guestsName": "IT-402",
       "date": "2021-12-15",
-      "fromTo": "10:00-10:30"
+      "from": "09:00",
+      "to": "09:30"
     },
     {
       "id": 3,
-      "roomName": "Meeting Room",
+      "roomName": "IT Laboratory",
       "hostName": "Stephen Hawking",
-      "guestsName": "IT-101",
+      "guestsName": "IT-201",
       "date": "2021-12-23",
-      "fromTo": "08:30-09:00"
+      "from": "08:30",
+      "to": "09:30"
+    },
+    {
+      "id": 4,
+      "roomName": "EAC Hall",
+      "hostName": "Peter Piper",
+      "guestsName": "IT-502",
+      "date": "2021-11-09",
+      "from": "10:00",
+      "to": "11:00"
+    },
+    {
+      "id": 5,
+      "roomName": "EAC Hall",
+      "hostName": "Annie Smith",
+      "guestsName": "HRM-102",
+      "date": "2021-11-09",
+      "from": "14:00",
+      "to": "15:00"
     }
   ]
 }
