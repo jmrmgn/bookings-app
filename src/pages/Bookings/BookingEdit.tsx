@@ -8,14 +8,12 @@ import {
   DialogContent,
   DialogActions,
   IconButton,
-  FormControl,
-  InputLabel,
-  Input,
   Grid,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { Close as CloseIcon } from '@mui/icons-material';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import { useBookings } from '../../context/Context';
 import { IBookings } from '../../interfaces';
@@ -67,14 +65,22 @@ interface Props {
   onClose: () => void;
 }
 
+const Schema = Yup.object().shape({
+  roomName: Yup.string().required('Required'),
+  hostName: Yup.string().required('Required'),
+  guestsName: Yup.string().required('Required'),
+  date: Yup.string().required('Required'),
+  from: Yup.string().required('Required'),
+  to: Yup.string().required('Required'),
+});
+
 const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
   const { booking, updateBooking } = useBookings();
 
   const formik = useFormik({
     initialValues: { ...booking },
-    validateOnChange: false,
-    // validationSchema: Schema,
-    onSubmit: async (values, { setFieldError, setSubmitting, resetForm }) => {
+    validationSchema: Schema,
+    onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true);
       await handleUpdate(values);
       setSubmitting(false);
@@ -95,48 +101,71 @@ const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
           Edit Booking
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <Grid container spacing={3} p={2}>
-            <Grid item xs={6}>
+          <Grid container spacing={3} p={1}>
+            <Grid item xs={12}>
               <InputField
+                name='date'
                 type='date'
                 label='Date'
                 value={values.date}
-                onChange={formik.handleChange('date')}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.errors.date}
                 inputProps={{ min: Datetime.today() }}
+                fixedLabel
               />
             </Grid>
             <Grid item xs={6}>
-              <FormControl variant='standard' fullWidth>
-                <InputLabel>From - To</InputLabel>
-                <Input
-                  value={values.fromTo}
-                  onChange={formik.handleChange('fromTo')}
-                />
-                {/* <FormHelperText id='component-error-text'>Error</FormHelperText> */}
-              </FormControl>
+              <InputField
+                name='from'
+                type='time'
+                label='From'
+                value={values.from}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.errors.from}
+                fixedLabel
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <InputField
+                name='to'
+                type='time'
+                label='To'
+                value={values.to}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.errors.to}
+                fixedLabel
+              />
             </Grid>
             <Grid item xs={12}>
               <InputField
+                name='roomName'
                 label='Room Name'
                 value={values.roomName}
-                onChange={formik.handleChange('roomName')}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.errors.roomName}
               />
             </Grid>
             <Grid item xs={12}>
               <InputField
+                name='hostName'
                 label='Host Name'
                 value={values.hostName}
-                onChange={formik.handleChange('hostName')}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.errors.hostName}
               />
             </Grid>
             <Grid item xs={12}>
               <InputField
+                name='guestsName'
                 label='Guests Name'
                 value={values.guestsName}
-                onChange={formik.handleChange('guestsName')}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={formik.errors.guestsName}
               />
             </Grid>

@@ -104,7 +104,9 @@ export default function Bookings() {
                   <TableCell>{row.hostName}</TableCell>
                   <TableCell>{row.guestsName}</TableCell>
                   <TableCell>{row.date}</TableCell>
-                  <TableCell>{row.fromTo}</TableCell>
+                  <TableCell>
+                    {row.from} - {row.to}
+                  </TableCell>
                   <TableCell align='center'>
                     <IconButton
                       color='primary'

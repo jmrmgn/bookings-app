@@ -6,7 +6,8 @@ export interface IBookings {
   hostName: string;
   guestsName: string;
   date: string;
-  fromTo: string;
+  from: string;
+  to: string;
 }
 
 export interface IBookingState {

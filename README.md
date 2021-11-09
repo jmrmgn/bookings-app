@@ -24,7 +24,7 @@ Bookings
     - [ ] Host name
     - [ ] Guests name
     - [ ] Date
-    - [ ] From-To (13:00-20:00)
+    - [ ] From-To (08:00-17:00)
   - [ ] Able to Filtered By:
     - [ ] By the date interval (only days, not times) of the booking time
     - [ ] By meeting room
