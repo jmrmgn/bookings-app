@@ -9,6 +9,9 @@ const ONE_HOUR = 60;
 const START = '08:00:00';
 const END = '17:00:00';
 
+// Schedule
+const schedule: { start: string; end: string } = { start: START, end: END };
+
 // Get date for today
 const today = (): string => moment(Date.now()).format(DATE_FORMAT);
 
@@ -20,7 +23,7 @@ const isValidSchedule = (timeRange: { from: string; to: string }): boolean => {
   const isSameOrAfterStart = moment(timeRange?.from, TIME_FORMAT).isSameOrAfter(
     startTime
   );
-  const isSameOrBeforeEnd = moment(timeRange?.to, TIME_FORMAT).isSameOrAfter(
+  const isSameOrBeforeEnd = moment(timeRange?.to, TIME_FORMAT).isSameOrBefore(
     endingTime
   );
 
@@ -39,4 +42,4 @@ const isValidTimeDuration = (start: string, end: string): boolean => {
   return isHalfHour || isOneHour;
 };
 
-export { today, isValidSchedule, isValidTimeDuration };
+export { schedule, today, isValidSchedule, isValidTimeDuration };
