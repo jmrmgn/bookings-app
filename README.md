@@ -1,19 +1,79 @@
-# Bookings-App
+# Bookings App
 
-**Model**
-
-Bookings
-
-| Name       | Type                          | Sample                              |
-| ---------- | ----------------------------- | ----------------------------------- |
-| id         | string                        | length + 1                          |
-| roomName   | string                        | --                                  |
-| hostName   | string                        | --                                  |
-| guestsName | string                        | --                                  |
-| date       | date                          | yyyy-mm-dd                          |
-| fromTo     | object {from: time, to: time} | { from: "08:00 AM", to: "09:00AM" } |
+A simple Web Application that manages Bookings.
 
 
+
+## Config File (.env)
+
+```
+# For simplicity, env file will not be added to .gitignore
+
+REACT_APP_SERVER_URI='http://localhost:3001'
+REACT_APP_SCHEDULE_START_TIME='08:00:00'
+REACT_APP_SCHEDULE_END_TIME='17:00:00'
+```
+
+
+
+## Quick Start
+
+**Install dependencies**
+
+```
+// go to directory
+npm install
+```
+
+
+
+**Mock Server** ([json-server](https://github.com/typicode/json-server))
+
+```
+npm run mock:server
+```
+
+The mock server should now be running in [localhost:3001](http://localhost:3001)
+
+
+
+**Start Web Application**
+
+```
+npm start
+```
+
+The app should now be running on [localhost:3000](http://localhost:3000/).
+
+
+
+**Running Cypress Tests** ([cypress](https://www.cypress.io/))
+
+```
+npm run cypress:open
+```
+
+An interactive cypress browser should appear.
+
+
+
+## Model
+
+**Bookings**
+
+| Name       | Type   | Sample     |
+| ---------- | ------ | ---------- |
+| id         | string | length + 1 |
+| roomName   | string | --         |
+| hostName   | string | --         |
+| guestsName | string | --         |
+| date       | date   | yyyy-mm-dd |
+| from       | string | 12:00      |
+| to         | string | 13:00      |
+
+
+
+## Features
 
 - [x] Booking List Page (/)
   - [x] List of Booking
@@ -29,15 +89,15 @@ Bookings
     - [x] By the date interval (only days, not times) of the booking time
     - [x] By meeting room
   - [x] Full Text search
-    - [x] user name? (Might be hostName)
+    - [x] user name(?) (Might be hostName)
     - [x] meeting room name
-- [x] Single Meeting Room Details Page
+- [x] Single Meeting Room Details Page (/booking/:id)
   - [x] This page can display the name of the room with any image and details about the room/
     It should also display the bookings made for that particular room.
 
 
 
-Validations
+## Validations
 
 - [x] A booking can be 30 minute or 1 hour long
 - [x] The first booking start time at 8:00 AM, the last one (start time) at 5:00 PM
@@ -46,7 +106,7 @@ Validations
 
 
 
-Additional Notes
+## Additional Notes
 
 - [x] Responsive
 - [x] Form Validation
@@ -64,7 +124,7 @@ Additional Notes
 
 
 
-Good to have feature
+## Good to have feature
 
 - [ ] Add Booking
 - [ ] Pagination of Booking
