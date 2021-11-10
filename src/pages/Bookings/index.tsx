@@ -102,7 +102,7 @@ const Bookings: React.FC = () => {
             <IconButton
               color='default'
               component='span'
-              data-cy='btn-edit'
+              data-cy='btn-view'
               onClick={() => {
                 navigate(`/booking/${params.row?.id}`);
               }}

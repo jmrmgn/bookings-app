@@ -49,10 +49,17 @@ Validations
 Additional Notes
 
 - [ ] Responsive
-- [ ] Form Validation
-- [ ] Error handler
+- [x] Form Validation
+- [x] Error handler
 - [ ] Documented Code
 - [ ] Cypress Test Case
+  - [ ] Should be able to show the list of Bookings
+  - [ ] Should be able to delete a booking
+    - [ ] Must not delete a booking if cancel is clicked
+  - [ ] Should be able to update a booking
+    - [ ] Should be able to show error when the booking is not 30-mins or 1 hour long
+    - [ ] Should be able to show error when the schedule is not in between of 8:00am - 5pm
+  - [x] Should be able to View the Booking
 
 
 

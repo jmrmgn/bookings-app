@@ -30,6 +30,7 @@ const InputField: React.FC<Props> = ({
   return (
     <FormControl error={hasError} fullWidth>
       <TextField
+        data-cy={`input-${name}`}
         error={hasError}
         name={name}
         label={label}

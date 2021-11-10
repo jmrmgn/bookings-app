@@ -78,13 +78,14 @@ const BookingView: React.FC = () => {
       <Grid item xs={12}>
         <Card variant='outlined'>
           <CardHeader
+            data-cy='view-header'
             title={booking.roomName}
             subheader={schedule}
             avatar={
               <IconButton
                 color='primary'
                 component='span'
-                data-cy='edit'
+                data-cy='btn-back'
                 onClick={() => navigate('/')}
               >
                 <ArrowBackIcon />
@@ -93,6 +94,7 @@ const BookingView: React.FC = () => {
           />
           <CardActionArea>
             <CardMedia
+              data-cy='view-media'
               component='img'
               height='220'
               image='https://source.unsplash.com/random/'
