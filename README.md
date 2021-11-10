@@ -15,7 +15,7 @@ Bookings
 
 
 
-- [ ] Booking List Page (/)
+- [x] Booking List Page (/)
   - [x] List of Booking
   - [x] Edit Booking (with Icon)
   - [x] Delete Booking (with Icon)
@@ -25,12 +25,12 @@ Bookings
     - [x] Guests name
     - [x] Date
     - [x] From-To (08:00-17:00)
-  - [ ] Able to Filtered By:
-    - [ ] By the date interval (only days, not times) of the booking time
-    - [ ] By meeting room
-  - [ ] Full Text search
-    - [ ] user name? (Might be hostName)
-    - [ ] meeting room name
+  - [x] Able to Filtered By:
+    - [x] By the date interval (only days, not times) of the booking time
+    - [x] By meeting room
+  - [x] Full Text search
+    - [x] user name? (Might be hostName)
+    - [x] meeting room name
 - [x] Single Meeting Room Details Page
   - [x] This page can display the name of the room with any image and details about the room/
     It should also display the bookings made for that particular room.

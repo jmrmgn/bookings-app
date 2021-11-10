@@ -6,7 +6,7 @@ interface Props {
   label: string;
   name: string;
   type?: string;
-  value: any;
+  value?: any;
   onChange?: (e: React.SyntheticEvent) => void;
   onBlur?: (e: React.SyntheticEvent) => void;
   error?: string | boolean;
@@ -51,7 +51,7 @@ InputField.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   error: PropTypes.string,

@@ -16,12 +16,14 @@ import {
 
 import { useBookings } from '../../context/Context';
 import BookingEdit from './BookingEdit';
+import Filters from './Filters';
 
-export default function Bookings() {
+const Bookings: React.FC = () => {
   const navigate = router.useNavigate();
   const [bookingId, setBookingId] = useState<number>();
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+
   const { bookings, deleteBooking, getBooking } = useBookings();
 
   const handleClose = (): void => {
@@ -134,6 +136,7 @@ export default function Bookings() {
 
   return (
     <>
+      {/* Delete Dialog */}
       <Dialog open={showDelete} onClose={handleClose}>
         <DialogTitle>Are you sure you want to delete?</DialogTitle>
         <DialogActions>
@@ -152,6 +155,9 @@ export default function Bookings() {
       {showEditDialog && (
         <BookingEdit id={bookingId} open={showEdit} onClose={handleCloseEdit} />
       )}
+      {/* Filters */}
+      <Filters />
+      {/* Booking List */}
       <DataGrid
         rows={bookings}
         columns={columns}
@@ -161,4 +167,6 @@ export default function Bookings() {
       />
     </>
   );
-}
+};
+
+export default Bookings;

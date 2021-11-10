@@ -4,6 +4,7 @@ import { Action } from '../enums';
 import {
   IBookingAction,
   IBookings,
+  IBookingsFilters,
   IBookingState,
   IContextModel,
 } from '../interfaces';
@@ -13,6 +14,7 @@ import { BookingService } from '../services/bookings';
 const initialState: IBookingState = {
   bookings: [],
   booking: {} as IBookings,
+  filters: {} as IBookingsFilters,
 };
 
 // Reducer
@@ -52,6 +54,13 @@ const reducer = (
         bookings: state.bookings.filter(
           booking => booking.id !== action.payload
         ),
+      };
+
+    case Action.FILTER:
+      return {
+        ...state,
+        filters: action.payload.filters,
+        bookings: action.payload.data,
       };
 
     default:
@@ -102,14 +111,22 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  const filterBookings = async (filters: IBookingsFilters) => {
+    const data = await BookingService.getBookingsByFilter(filters);
+    dispatch({
+      type: Action.FILTER,
+      payload: { filters, data },
+    });
+  };
+
   return (
     <Context.Provider
       value={{
-        booking: state.booking,
-        bookings: state.bookings,
+        ...state,
         deleteBooking,
         getBooking,
         updateBooking,
+        filterBookings,
       }}
     >
       {children}

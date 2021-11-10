@@ -3,4 +3,5 @@ export enum Action {
   DELETE = 'DELETE',
   GET_ONE = 'GET_ONE',
   UPDATE = 'UPDATE',
+  FILTER = 'FILTER',
 }
