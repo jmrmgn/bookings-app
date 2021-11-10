@@ -6,6 +6,9 @@ import {
   DialogTitle,
   DialogActions,
   Button,
+  Card,
+  CardContent,
+  Container,
 } from '@material-ui/core';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import {
@@ -135,7 +138,7 @@ const Bookings: React.FC = () => {
   ];
 
   return (
-    <>
+    <Container maxWidth='lg' disableGutters>
       {/* Delete Dialog */}
       <Dialog open={showDelete} onClose={handleClose}>
         <DialogTitle data-cy='dialog-delete'>
@@ -157,18 +160,22 @@ const Bookings: React.FC = () => {
       {showEditDialog && (
         <BookingEdit id={bookingId} open={showEdit} onClose={handleCloseEdit} />
       )}
-      {/* Filters */}
-      <Filters />
-      {/* Booking List */}
-      <DataGrid
-        data-cy='table-bookings'
-        rows={bookings}
-        columns={columns}
-        pageSize={bookings.length}
-        hideFooter
-        autoHeight
-      />
-    </>
+      <Card variant='outlined'>
+        <CardContent>
+          {/* Filters */}
+          <Filters />
+          {/* Booking List */}
+          <DataGrid
+            data-cy='table-bookings'
+            rows={bookings}
+            columns={columns}
+            pageSize={bookings.length}
+            hideFooter
+            autoHeight
+          />
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 

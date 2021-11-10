@@ -15,6 +15,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 import { useBookings } from '../../context/Context';
+import { Container } from '@material-ui/core';
 
 interface IDetails {
   name?: string;
@@ -74,53 +75,55 @@ const BookingView: React.FC = () => {
   )} (${fromTime} - ${toTime})`;
 
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Card variant='outlined'>
-          <CardHeader
-            data-cy='view-header'
-            title={booking.roomName}
-            subheader={schedule}
-            avatar={
-              <IconButton
-                color='primary'
-                component='span'
-                data-cy='btn-back'
-                onClick={() => navigate('/')}
-              >
-                <ArrowBackIcon />
-              </IconButton>
-            }
-          />
-          <CardActionArea>
-            <CardMedia
-              data-cy='view-media'
-              component='img'
-              height='220'
-              image='https://source.unsplash.com/random/'
+    <Container maxWidth='lg' disableGutters>
+      <Grid container>
+        <Grid item xs={12}>
+          <Card variant='outlined'>
+            <CardHeader
+              data-cy='view-header'
+              title={booking.roomName}
+              subheader={schedule}
+              avatar={
+                <IconButton
+                  color='primary'
+                  component='span'
+                  data-cy='btn-back'
+                  onClick={() => navigate('/')}
+                >
+                  <ArrowBackIcon />
+                </IconButton>
+              }
             />
-            <CardContent>
-              <Grid container>
-                <Grid item xs={12} md={6}>
-                  <Details
-                    name='hostName'
-                    label='Host name'
-                    value={booking.hostName}
-                  />
+            <CardActionArea>
+              <CardMedia
+                data-cy='view-media'
+                component='img'
+                height='220'
+                image='https://source.unsplash.com/random/'
+              />
+              <CardContent>
+                <Grid container>
+                  <Grid item xs={12} md={6}>
+                    <Details
+                      name='hostName'
+                      label='Host name'
+                      value={booking.hostName}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Details
+                      name='guestsName'
+                      label='Guests name'
+                      value={booking.guestsName}
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} md={6}>
-                  <Details
-                    name='guestsName'
-                    label='Guests name'
-                    value={booking.guestsName}
-                  />
-                </Grid>
-              </Grid>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 };
 

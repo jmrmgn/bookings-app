@@ -48,12 +48,13 @@ Validations
 
 Additional Notes
 
-- [ ] Responsive
+- [x] Responsive
 - [x] Form Validation
 - [x] Error handler
 - [ ] Documented Code
 - [ ] Cypress Test Case
   - [ ] Should be able to show the list of Bookings
+    - [ ] Should be able to filter and sort the table
   - [ ] Should be able to delete a booking
     - [ ] Must not delete a booking if cancel is clicked
   - [ ] Should be able to update a booking

@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+// Style
+import './styles.css';
+
 // Context
 import { Provider } from './context/Context';
 
