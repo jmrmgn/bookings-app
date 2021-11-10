@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as router from 'react-router';
 import {
   IconButton,
   Dialog,
@@ -7,12 +8,17 @@ import {
   Button,
 } from '@material-ui/core';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import {
+  Edit as EditIcon,
+  Delete as DeleteIcon,
+  Visibility as VisibilityIcon,
+} from '@mui/icons-material';
 
 import { useBookings } from '../../context/Context';
 import BookingEdit from './BookingEdit';
 
 export default function Bookings() {
+  const navigate = router.useNavigate();
   const [bookingId, setBookingId] = useState<number>();
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -47,7 +53,6 @@ export default function Bookings() {
   const showEditDialog = !!bookingId && showEdit;
 
   const columns: GridColDef[] = [
-    // { field: 'id', headerName: 'ID', width: 70 },
     {
       field: 'roomName',
       headerName: 'Meeting Room',
@@ -84,7 +89,7 @@ export default function Bookings() {
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 120,
+      width: 150,
       sortable: false,
       align: 'center',
       headerAlign: 'center',
@@ -92,6 +97,16 @@ export default function Bookings() {
       renderCell: params => {
         return (
           <>
+            <IconButton
+              color='default'
+              component='span'
+              data-cy='edit'
+              onClick={() => {
+                navigate(`/booking/${params.row?.id}`);
+              }}
+            >
+              <VisibilityIcon />
+            </IconButton>
             <IconButton
               color='primary'
               component='span'

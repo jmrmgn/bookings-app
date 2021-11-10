@@ -1,12 +1,21 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Bookings from './pages/Bookings';
+// Context
 import { Provider } from './context/Context';
+
+// Pages
+import Bookings from './pages/Bookings';
+import BookingView from './pages/Bookings/BookingView';
 
 function App() {
   return (
     <Provider>
-      <Bookings />
+      <Router>
+        <Routes>
+          <Route path='/' element={<Bookings />} />
+          <Route path='/booking/:id' element={<BookingView />} />
+        </Routes>
+      </Router>
     </Provider>
   );
 }

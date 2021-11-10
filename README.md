@@ -31,8 +31,8 @@ Bookings
   - [ ] Full Text search
     - [ ] user name? (Might be hostName)
     - [ ] meeting room name
-- [ ] Single Meeting Room Details Page
-  - [ ] This page can display the name of the room with any image and details about the room/
+- [x] Single Meeting Room Details Page
+  - [x] This page can display the name of the room with any image and details about the room/
     It should also display the bookings made for that particular room.
 
 
