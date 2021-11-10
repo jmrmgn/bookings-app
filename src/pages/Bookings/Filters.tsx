@@ -48,6 +48,7 @@ const Filters: React.FC = () => {
     <Grid container style={{ marginBottom: 10 }} spacing={2}>
       <Grid item xs={12} md={3}>
         <InputField
+          data-cy='input-q'
           name='q'
           label='Search'
           value={stateFilters.q ?? ''}
@@ -65,6 +66,7 @@ const Filters: React.FC = () => {
               name: 'roomName',
               onChange: handleChange,
             }}
+            data-cy='input-roomName'
           >
             <option value=''>N/a</option>
             {roomNames.map(roomName => (
@@ -77,6 +79,7 @@ const Filters: React.FC = () => {
       </Grid>
       <Grid item xs={6} md={3}>
         <InputField
+          data-cy='input-from'
           name='from'
           type='date'
           label='From'
@@ -87,6 +90,7 @@ const Filters: React.FC = () => {
       </Grid>
       <Grid item xs={6} md={3}>
         <InputField
+          data-cy='input-to'
           name='to'
           type='date'
           label='To'

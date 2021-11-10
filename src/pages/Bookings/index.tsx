@@ -102,7 +102,7 @@ const Bookings: React.FC = () => {
             <IconButton
               color='default'
               component='span'
-              data-cy='edit'
+              data-cy='btn-edit'
               onClick={() => {
                 navigate(`/booking/${params.row?.id}`);
               }}
@@ -112,7 +112,7 @@ const Bookings: React.FC = () => {
             <IconButton
               color='primary'
               component='span'
-              data-cy='edit'
+              data-cy='btn-edit'
               onClick={() => handleOpenEdit(params.row?.id)}
             >
               <EditIcon />
@@ -124,7 +124,7 @@ const Bookings: React.FC = () => {
                 setBookingId(params.row.id);
                 setShowDelete(true);
               }}
-              data-cy='delete'
+              data-cy='btn-delete'
             >
               <DeleteIcon />
             </IconButton>
@@ -138,15 +138,17 @@ const Bookings: React.FC = () => {
     <>
       {/* Delete Dialog */}
       <Dialog open={showDelete} onClose={handleClose}>
-        <DialogTitle>Are you sure you want to delete?</DialogTitle>
+        <DialogTitle data-cy='dialog-delete'>
+          Are you sure you want to delete?
+        </DialogTitle>
         <DialogActions>
-          <Button onClick={handleClose} data-cy='cancel-delete'>
+          <Button onClick={handleClose} data-cy='btn-cancel-delete'>
             Cancel
           </Button>
           <Button
             onClick={handleDelete}
             color='primary'
-            data-cy='confirm-delete'
+            data-cy='btn-confirm-delete'
           >
             Yes
           </Button>
@@ -159,6 +161,7 @@ const Bookings: React.FC = () => {
       <Filters />
       {/* Booking List */}
       <DataGrid
+        data-cy='table-bookings'
         rows={bookings}
         columns={columns}
         pageSize={bookings.length}

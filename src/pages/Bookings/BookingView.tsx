@@ -17,17 +17,26 @@ import moment from 'moment';
 import { useBookings } from '../../context/Context';
 
 interface IDetails {
+  name?: string;
   label?: string;
   value?: string;
 }
 
-const Details: React.FC<IDetails> = ({ label, value }) => {
+const Details: React.FC<IDetails> = ({ name, label, value }) => {
   return (
     <>
-      <Typography variant='h5' component='div'>
+      <Typography
+        variant='h5'
+        component='div'
+        data-cy={`details-value-${name}`}
+      >
         {value}
       </Typography>
-      <Typography sx={{ mb: 1.5 }} color='text.secondary'>
+      <Typography
+        sx={{ mb: 1.5 }}
+        color='text.secondary'
+        data-cy={`details-label-${name}`}
+      >
         {label}
       </Typography>
     </>
@@ -35,6 +44,7 @@ const Details: React.FC<IDetails> = ({ label, value }) => {
 };
 
 Details.propTypes = {
+  name: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.string,
 };
@@ -90,10 +100,18 @@ const BookingView: React.FC = () => {
             <CardContent>
               <Grid container>
                 <Grid item xs={12} md={6}>
-                  <Details label='Host name' value={booking.hostName} />
+                  <Details
+                    name='hostName'
+                    label='Host name'
+                    value={booking.hostName}
+                  />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <Details label='Guests name' value={booking.guestsName} />
+                  <Details
+                    name='guestsName'
+                    label='Guests name'
+                    value={booking.guestsName}
+                  />
                 </Grid>
               </Grid>
             </CardContent>

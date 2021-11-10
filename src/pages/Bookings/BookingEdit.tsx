@@ -131,18 +131,23 @@ const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
   return (
     <BootstrapDialog onClose={onClose} open={open}>
       <Box component='form' onSubmit={formik.handleSubmit}>
-        <BootstrapDialogTitle id='customized-dialog-title' onClose={onClose}>
+        <BootstrapDialogTitle
+          id='customized-dialog-title'
+          data-cy='edit-title'
+          onClose={onClose}
+        >
           Edit Booking
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Grid container spacing={3} p={1}>
             {errors.length > 0 && (
-              <Grid item xs={12}>
+              <Grid item xs={12} data-cy='container-error'>
                 <Alert severity='error' title='Error' message={errors} />
               </Grid>
             )}
             <Grid item xs={12}>
               <InputField
+                data-cy='input-date'
                 name='date'
                 type='date'
                 label='Date'
@@ -156,6 +161,7 @@ const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
             </Grid>
             <Grid item xs={6}>
               <InputField
+                data-cy='input-from'
                 name='from'
                 type='time'
                 label='From'
@@ -168,6 +174,7 @@ const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
             </Grid>
             <Grid item xs={6}>
               <InputField
+                data-cy='input-to'
                 name='to'
                 type='time'
                 label='To'
@@ -180,6 +187,7 @@ const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
             </Grid>
             <Grid item xs={12}>
               <InputField
+                data-cy='input-roomName'
                 name='roomName'
                 label='Room Name'
                 value={values.roomName}
@@ -190,6 +198,7 @@ const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
             </Grid>
             <Grid item xs={12}>
               <InputField
+                data-cy='input-hostName'
                 name='hostName'
                 label='Host Name'
                 value={values.hostName}
@@ -200,6 +209,7 @@ const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
             </Grid>
             <Grid item xs={12}>
               <InputField
+                data-cy='input-guestsName'
                 name='guestsName'
                 label='Guests Name'
                 value={values.guestsName}
@@ -211,10 +221,10 @@ const BookingEdit: React.FC<Props> = ({ id, open = false, onClose }) => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} color='inherit'>
+          <Button onClick={onClose} color='inherit' data-cy='btn-cancel-edit'>
             Cancel
           </Button>
-          <Button type='submit' color='primary'>
+          <Button type='submit' color='primary' data-cy='btn-save-edit'>
             Save
           </Button>
         </DialogActions>
