@@ -5,7 +5,7 @@
       "roomName": "EAC Hall",
       "hostName": "John Doe",
       "guestsName": "IT-4A1",
-      "date": "2021-11-09",
+      "date": "2021-11-15",
       "from": "10:00",
       "to": "10:30"
     },
@@ -32,7 +32,7 @@
       "roomName": "EAC Hall",
       "hostName": "Peter Piper",
       "guestsName": "IT-502",
-      "date": "2021-11-09",
+      "date": "2021-11-16",
       "from": "10:00",
       "to": "11:00"
     },
@@ -41,7 +41,7 @@
       "roomName": "EAC Hall",
       "hostName": "Annie Smith",
       "guestsName": "HRM-102",
-      "date": "2021-11-09",
+      "date": "2021-11-18",
       "from": "14:00",
       "to": "15:00"
     }

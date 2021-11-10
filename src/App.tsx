@@ -7,6 +7,9 @@ import { Provider } from './context/Context';
 import Bookings from './pages/Bookings';
 import BookingView from './pages/Bookings/BookingView';
 
+// dotenv config
+require('dotenv').config();
+
 function App() {
   return (
     <Provider>

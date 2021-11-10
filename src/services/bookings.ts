@@ -3,8 +3,7 @@ import moment from 'moment';
 
 import { IBookings, IBookingsFilters } from '../interfaces';
 
-// Todo: Move to .env
-const SERVER_URI = 'http://localhost:3001';
+const SERVER_URI = process.env.REACT_APP_SERVER_URI;
 
 const buildFilter = (filters: IBookingsFilters): string => {
   const roomName = filters?.roomName;

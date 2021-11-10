@@ -5,9 +5,8 @@ const TIME_FORMAT = 'HH:mm:ss';
 const HALF_HOUR = 30;
 const ONE_HOUR = 60;
 
-// TODO: Transfer in .env
-const START = '08:00:00';
-const END = '17:00:00';
+const START = process.env.REACT_APP_SCHEDULE_START_TIME ?? '08:00:00';
+const END = process.env.REACT_APP_SCHEDULE_END_TIME ?? '17:00:00';
 
 // Schedule
 const schedule: { start: string; end: string } = { start: START, end: END };
