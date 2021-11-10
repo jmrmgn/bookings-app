@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { Action } from '../enums';
+import reducer from './reducer';
 
 import {
-  IBookingAction,
   IBookings,
   IBookingsFilters,
   IBookingState,
@@ -15,57 +15,6 @@ const initialState: IBookingState = {
   bookings: [],
   booking: {} as IBookings,
   filters: {} as IBookingsFilters,
-};
-
-// Reducer
-const reducer = (
-  state: IBookingState,
-  action: IBookingAction
-): IBookingState => {
-  switch (action.type) {
-    case Action.GET:
-      return {
-        ...state,
-        bookings: action.payload,
-      };
-
-    case Action.GET_ONE:
-      return {
-        ...state,
-        booking: action.payload,
-      };
-
-    case Action.UPDATE:
-      const updatedBooking = action.payload;
-
-      const updatedBookings: IBookings[] = state.bookings.map(booking => {
-        if (booking.id === updatedBooking.id) {
-          return updatedBooking;
-        }
-
-        return booking;
-      });
-
-      return { ...state, bookings: updatedBookings };
-
-    case Action.DELETE:
-      return {
-        ...state,
-        bookings: state.bookings.filter(
-          booking => booking.id !== action.payload
-        ),
-      };
-
-    case Action.FILTER:
-      return {
-        ...state,
-        filters: action.payload.filters,
-        bookings: action.payload.data,
-      };
-
-    default:
-      return state;
-  }
 };
 
 // Create Context
